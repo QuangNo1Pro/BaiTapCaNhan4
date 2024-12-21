@@ -1,0 +1,9 @@
+- Lên được màn hình Home với dữ liệu :                            50%  0.5đ
+- Template Enginge tự xây dựng xử lý được điền dữ liệu từ biến :  50%  0.5đ
+- Template Enginge tự xây dựng xử lý được điền dữ liệu từ biến :  50%  0.5đ
+- Template Enginge tự xây dựng xử lý được biểu thức điều kiện :   50%  0.5đ
+- Tempalte Enginge tự xây dựng xử lý được biểu thức vòng lặp :    50%  0.5đ
+- Tempalte Enginge tự xây dựng xử lý được biểu thức con lồng nhau :    50%  0.5đ
+....
+
+=> 3 điểm

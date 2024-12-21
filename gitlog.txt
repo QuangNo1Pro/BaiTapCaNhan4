@@ -1,0 +1,41 @@
+commit b6232b5836a10198548f74659339fc6eafda5095
+Author: QuangNo1Pro <levanquangh7@gmail.com>
+Date:   Mon Dec 9 20:54:49 2024 +0700
+
+    Chưa hoàn thành template để up hiển thị data
+
+commit 6077bf31f027212551701a6012d9a35ce74a219f
+Author: QuangNo1Pro <levanquangh7@gmail.com>
+Date:   Mon Dec 9 18:15:44 2024 +0700
+
+    Dark mode hoàn thành
+
+commit 972315e2a6c7fc23b5bbbfc6bd538f903a79ffdd
+Author: QuangNo1Pro <levanquangh7@gmail.com>
+Date:   Mon Dec 9 05:18:00 2024 +0700
+
+    Xong sơ lược về template
+
+commit d3c96a612a9bcd03e7144628c3e129d45893a4b5
+Author: QuangNo1Pro <levanquangh7@gmail.com>
+Date:   Mon Dec 9 04:59:25 2024 +0700
+
+    Insert database thành công
+
+commit 37927766a51b0cc1a6c42bdf6cca876cb7122145
+Author: QuangNo1Pro <levanquangh7@gmail.com>
+Date:   Sat Dec 7 22:58:12 2024 +0700
+
+    Connect thành công tới server
+
+commit 977bbd350415a5b7a5aac9d83f6d3be819c31ee0
+Author: QuangNo1Pro <levanquangh7@gmail.com>
+Date:   Sat Dec 7 22:20:40 2024 +0700
+
+    Thêm node mudules và server.js
+
+commit 81be370e7bf849020e81debd92bc0604ac71d7ec
+Author: QuangNo1Pro <levanquangh7@gmail.com>
+Date:   Sat Dec 7 22:17:13 2024 +0700
+
+    Tạo folder BTCN3
