@@ -1,20 +1,23 @@
 const express = require('express')
 const path = require('path')
 const fs = require('fs')
-const { connection } = require('../connectToDB/db')
 require('dotenv').config()
 const passport = require('passport')
 const { engine } = require('express-handlebars')
 const https = require('https')
-const { websocket, WebSocketServer} = require('ws')
+const {WebSocketServer} = require('ws')
 const session = require('express-session')
 const { initializePassport } = require('./config/passport')
+const fileUpload = require('express-fileupload')
 
 const PORT_AUTH = process.env.DB_PORT_SERVER_AUTH
 const app = express()
+
 // Middleware xử lý
 app.use(express.urlencoded({ extended: true }))
 app.use(express.json())
+app.use(fileUpload())
+app.use('/uploads', express.static(path.join(__dirname, 'uploads')))
 // Cấu hình session
 app.use(session({
   secret: 'secret_key',
@@ -39,11 +42,9 @@ app.engine(
 app.set('view engine', 'handlebars')
 app.set('views', path.join(__dirname, 'views'))
 
-
-//Router
-const authRouter=require('../auth-server/routers/authRouters')
-app.use(authRouter);
-
+// Router
+const authRouter = require('../auth-server/routers/authRouters')
+app.use(authRouter)
 
 const options = {
   key: fs.readFileSync('../source/auth-server/sslkeys/key.pem'),

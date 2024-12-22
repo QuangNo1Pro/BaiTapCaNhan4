@@ -1,14 +1,18 @@
+<!-- Hiển thị thông báo lỗi nếu có -->
+{{#if errorMessage}}
+    <div class="alert alert-danger">
+        {{errorMessage}}
+    </div>
+{{/if}}
+{{#if message}}
+    <div class="alert alert-danger">
+        {{message}}
+    </div>
+{{/if}}
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
+
     <div class="card p-4 w-100" style="max-width: 400px;">
         <h1 class="text-center mb-4">Login</h1>
-
-        <!-- Hiển thị thông báo lỗi nếu có -->
-        {{#if errorMessage}}
-        <div class="alert alert-danger">
-            {{errorMessage}}
-        </div>
-        {{/if}}
-
         <form action="/auth/login" method="POST">
             <div class="mb-3">
                 <label for="username" class="form-label">Username:</label>

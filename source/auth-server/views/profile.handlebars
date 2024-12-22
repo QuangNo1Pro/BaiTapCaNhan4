@@ -1,26 +1,58 @@
 <div class="container d-flex justify-content-center align-items-center min-vh-100">
     <div class="card p-4 w-100" style="max-width: 400px;">
-        <h1 class="text-center mb-4">User Profile</h1>
 
-        <!-- Hiển thị thông tin người dùng -->
-        <div class="mb-3">
-            <p><strong>Username:</strong>
-                <%= username %>
-            </p>
+        <!-- Tiêu đề -->
+        <h1 class="text-center mb-4"> Profile</h1>
+
+        <!-- Thông tin người dùng -->
+        <div class="mb-4">
+            <div class="mb-3">
+                <p><strong>Username:</strong> {{username}}</p>
+            </div>
+            <div class="mb-3">
+                <p><strong>Nickname:</strong> {{profile.nickname}}</p>
+            </div>
+            <div class="mb-3">
+                <p><strong>Fullname:</strong> {{profile.fullname}}</p>
+            </div>
+            <div class="mb-3">
+                <p><strong>Avatar:</strong></p>
+                <img src="{{profile.avatar}}" alt="Avatar" class="img-fluid rounded-circle"
+                    style="width: 150px; height: 150px;">
+            </div>
         </div>
 
-        <div class="mb-3">
-            <p><strong>Full Name:</strong>
-                <%= fullname %>
-            </p>
+        <!-- Cập nhật thông tin -->
+        {{#if allowUpdate}}
+        <div class="mb-4">
+            <h5 class="mb-3">Update Your Profile</h5>
+            <form action="/auth/profiles/update" method="POST" enctype="multipart/form-data">
+                <div class="mb-3">
+                    <label for="nickname" class="form-label">Nickname</label>
+                    <input type="text" id="nickname" name="nickname" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="fullname" class="form-label">Full Name</label>
+                    <input type="text" id="fullname" name="fullname" class="form-control" required>
+                </div>
+                <div class="mb-3">
+                    <label for="avatar" class="form-label">Avatar</label>
+                    <input type="file" id="avatar" name="avatar" class="form-control">
+                </div>
+                <button type="submit" class="btn btn-primary w-100">Update Profile</button>
+            </form>
+        </div>
+        {{else}}
+        <div class="alert alert-info text-center mt-4">
+            <p>Your profile has been updated and cannot be updated again.</p>
+        </div>
+        {{/if}}
+
+        <!-- Nút đăng xuất và chuyển đến game -->
+        <div class="mt-4">
+            <a href="/auth/logout" class="btn btn-danger w-100 mb-3">Logout</a>
+            <a href="http://localhost:22296" class="btn btn-success w-100">Play Game</a>
         </div>
 
-        <div class="mb-3">
-            <p><strong>Avatar:</strong></p>
-            <img src="<%= avatar %>" alt="Avatar" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
-        </div>
-
-        <!-- Nút đăng xuất -->
-        <a href="/auth/logout" class="btn btn-danger w-100">Logout</a>
     </div>
 </div>

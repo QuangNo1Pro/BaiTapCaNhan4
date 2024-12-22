@@ -24,9 +24,38 @@ const addUser = async (username, hashedPassword) => {
     } catch (e) {
         throw e;
     }
-
 }
+const getProfileByUserId = async (userId) => {
+  try {
+    const profile = await connection.oneOrNone(
+      'SELECT * FROM s22296.profiles WHERE "user_id" = $1',
+      [userId]
+    );
+    return profile || null;
+  } catch (err) {
+    throw err;
+  }
+};
+
+const updateProfile = async (userId, nickname, fullname, avatar) => {
+  try {
+    // Sử dụng INSERT với ON CONFLICT để chèn mới hoặc cập nhật nếu user_id đã tồn tại
+    await connection.none(
+      `
+      INSERT INTO s22296.profiles ("user_id", "nickname", "fullname", "avatar")
+      VALUES ($1, $2, $3, $4)
+      `,
+      [userId, nickname, fullname, avatar]
+    );
+    console.log('Cập nhật profile thành công!');
+  } catch (err) {
+    console.error('Lỗi khi cập nhật profile:', err.message || err);
+    throw err;
+  }
+};
 
 
 
-module.exports = {getUserByUsername,getUserById,checkAccountExists,addUser };
+
+
+module.exports = {getUserByUsername,getUserById,checkAccountExists,addUser,getProfileByUserId,updateProfile };

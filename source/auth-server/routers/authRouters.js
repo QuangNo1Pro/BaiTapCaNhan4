@@ -3,8 +3,8 @@ const express = require('express')
 const router = express.Router()
 const { showRegisterForm, registerUser } = require('../controllers/registerControllers')
 const { renderLogin, login } = require('../controllers/loginControllers')
-const { showProfiles } = require('../controllers/profilesController')
-const { logout}=require('../controllers/logoutControllers')
+const { showProfiles, UpdateProfile } = require('../controllers/profilesController')
+const { logout} = require('../controllers/logoutControllers')
 
 //  hiển thị form đăng ký
 router.get('/', showRegisterForm)
@@ -20,8 +20,9 @@ router.post('/auth/login', login)
 
 // Profile
 router.get('/auth/profiles', showProfiles)
+router.post('/auth/profiles/update', UpdateProfile)
 
-//Logout
-router.get('/auth/logout',logout)
+// Logout
+router.get('/auth/logout', logout)
 
 module.exports = router
