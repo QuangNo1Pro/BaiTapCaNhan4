@@ -1,0 +1,26 @@
+<div class="container d-flex justify-content-center align-items-center min-vh-100">
+    <div class="card p-4 w-100" style="max-width: 400px;">
+        <h1 class="text-center mb-4">User Profile</h1>
+
+        <!-- Hiển thị thông tin người dùng -->
+        <div class="mb-3">
+            <p><strong>Username:</strong>
+                <%= username %>
+            </p>
+        </div>
+
+        <div class="mb-3">
+            <p><strong>Full Name:</strong>
+                <%= fullname %>
+            </p>
+        </div>
+
+        <div class="mb-3">
+            <p><strong>Avatar:</strong></p>
+            <img src="<%= avatar %>" alt="Avatar" class="img-fluid rounded-circle" style="width: 150px; height: 150px;">
+        </div>
+
+        <!-- Nút đăng xuất -->
+        <a href="/auth/logout" class="btn btn-danger w-100">Logout</a>
+    </div>
+</div>
