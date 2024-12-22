@@ -1,5 +1,7 @@
 const passport = require('passport');
-
+require('dotenv').config();  
+const jwt = require('jsonwebtoken');
+const JWT_SECRET = process.env.JWT_SECRET;
 // Render trang đăng nhập
 const renderLogin = async (req, res) => {
     // Lấy thông báo từ query parameters
@@ -16,8 +18,11 @@ const login = async (req, res, next) => {
     }
 
     req.logIn(user, (err) => {
-      if (err) return next(err); 
-    res.redirect('/auth/profiles')
+        if (err) return next(err); 
+         // Tạo JWT token
+      const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
+
+    res.redirect(`/auth/profiles?token=${token}`)
     });
   })(req, res, next); 
 }
