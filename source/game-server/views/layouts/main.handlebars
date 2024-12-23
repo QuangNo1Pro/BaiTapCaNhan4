@@ -27,7 +27,7 @@
                 <h2><i class="bi bi-hand-thumbs-up"></i> Xin Chào!</h2>
             </div>
             <div class="card-body">
-                <h4 class="card-title text-success">Chào mừng bạn,</h4>
+                <h4 class="card-title text-success">Chào mừng bạn</h4>
                 <h3 class="card-text text-primary fw-bold">{{username.username}}</h3>
             </div>
         </div>
@@ -68,8 +68,32 @@
                     </div>
                 </div>
             </div>
+            <div class="modal fade" id="create-room-modal" tabindex="-1" aria-labelledby="create-room-modal-label"
+                aria-hidden="true">
+                <div class="modal-dialog">
+                    <div class="modal-content">
+                        <div class="modal-header">
+                            <h5 class="modal-title" id="create-room-modal-label">Tạo Bàn Cờ</h5>
+                            <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                        </div>
+                        <div class="modal-body">
+                            <form action="/create" methods="POST" id="create-room-form">
+                                <div class="mb-3">
+                                    <label for="room-name" class="form-label">Tên Bàn Cờ</label>
+                                    <input type="text" class="form-control" id="room-name" name="roomName" required>
+                                </div>
+                                <div class="mb-3">
+                                    <label for="room-size" class="form-label">Nhập Kích Thước Bàn Cờ (số nguyên )</label>
+                                    <input type="number" class="form-control" id="room-size" name="size" min="2"
+                                        max="10" required>
+                                </div>
+                                <button type="submit" class="btn btn-primary w-100">Tạo Bàn</button>
+                            </form>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <!-- Nội dung chính: Danh sách bàn cờ -->
             <div class="col-md-9">
                 <div class="card">
                     <div class="card-header text-center bg-primary text-white">
@@ -150,58 +174,27 @@
     <script src="https://cdn.jsdelivr.net/npm/bootstrap@5.3.0/dist/js/bootstrap.bundle.min.js"></script>
     <script>
         setTimeout(() => {
-                const welcomeMessage = document.getElementById('welcome-message');
-                if (welcomeMessage) {
-                    welcomeMessage.style.transition = "opacity 0.5s ease"; // Thêm hiệu ứng mờ dần
-                    welcomeMessage.style.opacity = "0"; // Mờ dần
-                    setTimeout(() => welcomeMessage.style.display = "none", 500); // Sau khi mờ, ẩn hoàn toàn
-                }
-            }, 2000);
+            const welcomeMessage = document.getElementById('welcome-message');
+            if (welcomeMessage) {
+                welcomeMessage.style.transition = "opacity 0.5s ease"; 
+                welcomeMessage.style.opacity = "0"; 
+                setTimeout(() => {
+                    welcomeMessage.style.display = "none"; 
+                }, 500);
+            }
+        }, 2000);
+
         // Hiển thị Modal khi nhấn nút "Bảng Xếp Hạng"
         document.getElementById('leaderboard-btn').addEventListener('click', () => {
             const modal = new bootstrap.Modal(document.getElementById('leaderboard-modal'));
             modal.show();
         });
-        function getTokenFromUrl() {
-                const urlParams = new URLSearchParams(window.location.search);
-                return urlParams.get('token');  // Lấy giá trị của tham số 'token'
-        }
 
-        // Logout
-        document.getElementById('logout-btn').addEventListener('click', async function () {
-                try {
-                    const token = getTokenFromUrl();  
-                    console.log('Token nhận được:', token);
-
-                    if (token) {
-                        const response = await fetch('https://localhost:53003/auth/logout', {
-                            method: 'POST',
-                            headers: {
-                                'Content-Type': 'application/json',
-                                'Authorization': `Bearer ${token}` // Gửi JWT token qua header
-                            }
-                        });
-
-                        console.log('Response từ auth server:', response);
-                        if (!response.ok) {
-                            throw new Error('Không thể logout. Vui lòng thử lại!');
-                        }
-
-                        const data = await response.json();
-                        console.log('Dữ liệu từ auth server:', data);
-
-                        // Sau khi logout thành công, chuyển hướng về trang login
-                        window.location.href = 'https://localhost:53003/auth/login';
-                    } else {
-                        alert('Không tìm thấy token. Bạn sẽ được chuyển hướng đến trang đăng nhập.');
-                        // Chuyển hướng đến trang login nếu không có token
-                        window.location.href = 'https://localhost:53003/auth/login';
-                    }
-                } catch (error) {
-                    console.error('Lỗi khi gửi yêu cầu logout:', error);
-                    alert('Có lỗi xảy ra khi đăng xuất. Vui lòng thử lại.');
-                }
-            });
+        // Hiển thị Modal khi nhấn nút "Tạo Bàn Cờ"
+        document.getElementById('create-room-btn').addEventListener('click', () => {
+            const modal = new bootstrap.Modal(document.getElementById('create-room-modal'));
+            modal.show();
+        });
     </script>
 
 </body>

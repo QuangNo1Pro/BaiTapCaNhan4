@@ -47,7 +47,7 @@ const showProfiles = async (req, res) => {
   } catch (err) {
     // Nếu có lỗi trong quá trình giải mã token hoặc xử lý profile
     console.error('Lỗi khi hiển thị trang profile:', err.message || err);
-    res.status(500).send('Lỗi khi hiển thị trang profile.');
+    res.redirect('/auth/login?message="jwt hết hạn, vui lòng đăng nhập lại "');
   }
 };
 const UpdateProfile = async (req, res) => {

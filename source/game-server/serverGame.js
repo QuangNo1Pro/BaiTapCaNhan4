@@ -22,6 +22,13 @@ app.use(
     cookie: { secure: false, httpOnly: true, maxAge: 1000 * 60 * 60 * 24 * 7 }, // Cấu hình cookie không bảo mật khi phát triển (https cần secure: true)
   })
 )
+app.use((req, res, next) => {
+  if (req.query.token) {
+    req.session.token = req.query.token
+    //console.log(req.session.token)
+  }
+  next()
+})
 
 // Khởi tạo passport
 app.use(passport.initialize())
@@ -35,7 +42,7 @@ app.engine(
     defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
     helpers: {
-      rank: (index) => index + 1, 
+      rank: (index) => index + 1
     }
   })
 )

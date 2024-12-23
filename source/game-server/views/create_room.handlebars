@@ -1,0 +1,13 @@
+<div class="container mt-5">
+    <h2 class="text-center mb-4">Tạo Phòng Game</h2>
+
+    <form action="create-room" method="POST">
+        <!-- Kích thước bàn game -->
+        <div class="mb-3">
+            <label for="size" class="form-label">Kích thước bàn game</label>
+            <input type="number" class="form-control" id="size" name="size" min="2" required>
+            <div class="form-text">Kích thước bàn game </div>
+        </div>
+        <button type="submit" class="btn btn-primary w-100">Tạo Phòng</button>
+    </form>
+</div>

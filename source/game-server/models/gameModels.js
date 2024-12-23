@@ -33,9 +33,21 @@ const getRanking = async () => {
   }
 };
 
+const creat_room = async (req, res) => {
+    const { size } = req.body;
+    try {
+        const result= await connection.query(`
+            INSERT INTO s22296.game_boards (size)
+            VALUES ($1)`, [size]);
 
+        res.redirect('game-room'); 
+    } catch (err) {
+        console.error('Error creating game room:', err.message);
+        res.status(500).send('Không thể tạo phòng game');
+    }
+}
 
 
 module.exports = {
-  getAllUsers,getRanking
+  getAllUsers,getRanking,creat_room
 };

@@ -27,13 +27,15 @@ const showOnlineUsers = async (req, res) => {
     //console.log(onlineUsers);
     const username = req.user;
     const id = req.user.id;
+    const token = req.session.token;
+    //console.log(token);
   
     const onlineUsers = await getAllUsers(id);
     const users = await getRanking();
    // console.log(users);
 
     // Truyền dữ liệu vào view
-    res.render('layouts/main',{ onlineUsers, username,users});
+    res.render('layouts/main',{ onlineUsers, username,users,token});
   } catch (err) {
     console.error('Lỗi khi lấy danh sách người dùng online:', err.message);
     res.status(500).send('Không thể lấy danh sách người dùng online');
