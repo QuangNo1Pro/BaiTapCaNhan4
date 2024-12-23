@@ -7,7 +7,7 @@ const path = require('path')
 const session = require('express-session')
 const { initializePassport } = require('../auth-server/config/passport'); // Đảm bảo có file passport.js hợp lệ
 
-const PORT_GAME = process.env.DB_PORT_SERVER_GAME;
+const PORT_GAME = process.env.DB_PORT_SERVER_GAME
 
 // Middleware xử lý
 app.use(express.urlencoded({ extended: true }))
@@ -34,6 +34,9 @@ app.engine(
   engine({
     defaultLayout: 'main',
     layoutsDir: path.join(__dirname, 'views', 'layouts'),
+    helpers: {
+      rank: (index) => index + 1, 
+    }
   })
 )
 app.set('view engine', 'handlebars')

@@ -47,6 +47,7 @@
                             <thead class="table-light">
                                 <tr>
                                     <th>Name</th>
+                                    <td>Nickname</td>
                                     <th>Status</th>
                                 </tr>
                             </thead>
@@ -54,6 +55,7 @@
                                 {{#each onlineUsers}}
                                 <tr>
                                     <td>{{this.username}}</td>
+                                    <td>{{this.nickname}}</td>
                                     <td>{{this.status}}</td>
                                 </tr>
                                 {{else}}
@@ -120,15 +122,16 @@
                     <table class="table table-striped">
                         <thead>
                             <tr>
-                                <th>Hạng</th>
-                                <th>Tên Người Chơi</th>
-                                <th>Điểm</th>
+                                <th>Rank</th>
+                                <th>Nickname</th>
+                                <th>Score</th>
                             </tr>
                         </thead>
                         <tbody>
-                            {{#each leaderboard}}
+                            {{#each users}}
                             <tr>
-                                <td>{{this.username}}</td>
+                                <td>{{rank @index }}</td>
+                                <td>{{this.nickname}}</td>
                                 <td>{{this.score}}</td>
                             </tr>
                             {{else}}

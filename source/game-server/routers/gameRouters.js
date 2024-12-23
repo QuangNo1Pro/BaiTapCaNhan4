@@ -4,5 +4,4 @@ const { authenticateToken, showOnlineUsers } = require('../controllers/gameContr
 
 // Route game, yêu cầu người dùng phải xác thực bằng token JWT
 router.get('/', authenticateToken, showOnlineUsers)
-
 module.exports = router

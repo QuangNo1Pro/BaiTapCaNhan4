@@ -1,7 +1,7 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = process.env.JWT_SECRET
-const { getAllUsers } = require('../models/gameModels')
+const { getAllUsers,getRanking  } = require('../models/gameModels')
 // Middleware để xác thực JWT token
 const authenticateToken = (req, res, next) => {
   const token = req.query.token; // Lấy token từ query parameter
@@ -29,9 +29,11 @@ const showOnlineUsers = async (req, res) => {
     const id = req.user.id;
   
     const onlineUsers = await getAllUsers(id);
+    const users = await getRanking();
+   // console.log(users);
 
     // Truyền dữ liệu vào view
-    res.render('layouts/main',{ onlineUsers, username});
+    res.render('layouts/main',{ onlineUsers, username,users});
   } catch (err) {
     console.error('Lỗi khi lấy danh sách người dùng online:', err.message);
     res.status(500).send('Không thể lấy danh sách người dùng online');
