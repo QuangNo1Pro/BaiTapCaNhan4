@@ -1,5 +1,6 @@
 const passport = require('passport');
 require('dotenv').config();  
+const{updateUserStatus}=require('../models/Auth/AuthDatabase')
 const jwt = require('jsonwebtoken');
 const JWT_SECRET = process.env.JWT_SECRET;
 // Render trang đăng nhập
@@ -18,7 +19,10 @@ const login = async (req, res, next) => {
     }
 
     req.logIn(user, (err) => {
-        if (err) return next(err); 
+      if (err) return next(err); 
+      // Cập nhật trạng thái người dùng online
+      updateUserStatus(user.id, 'online');
+
          // Tạo JWT token
       const token = jwt.sign({ id: user.id, username: user.username }, JWT_SECRET, { expiresIn: '1h' });
 

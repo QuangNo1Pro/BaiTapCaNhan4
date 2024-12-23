@@ -53,9 +53,17 @@ const updateProfile = async (userId, nickname, fullname, avatar) => {
     throw err;
   }
 };
+const updateUserStatus = async (userId, status) => {
+  try {
+    await connection.query('UPDATE s22296.users SET "status" = $1 WHERE "id" = $2', [status, userId]);
+  } catch (err) {
+    throw new Error('Lỗi khi cập nhật trạng thái người dùng: ' + err.message);
+  }
+};
 
 
 
 
 
-module.exports = {getUserByUsername,getUserById,checkAccountExists,addUser,getProfileByUserId,updateProfile };
+
+module.exports = {getUserByUsername,getUserById,checkAccountExists,addUser,getProfileByUserId,updateProfile,updateUserStatus };

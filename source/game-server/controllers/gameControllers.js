@@ -1,6 +1,7 @@
 require('dotenv').config()
 const jwt = require('jsonwebtoken')
 const JWT_SECRET = process.env.JWT_SECRET
+const { getAllUsers } = require('../models/gameModels')
 // Middleware để xác thực JWT token
 const authenticateToken = (req, res, next) => {
   const token = req.query.token; // Lấy token từ query parameter
@@ -20,13 +21,21 @@ const authenticateToken = (req, res, next) => {
     next(); // Tiếp tục với các xử lý tiếp theo
   })
 }
+const showOnlineUsers = async (req, res) => {
+  try {
+   
+    //console.log(onlineUsers);
+    const username = req.user;
+    const id = req.user.id;
+  
+    const onlineUsers = await getAllUsers(id);
 
-// Route game yêu cầu người dùng phải xác thực
-const getGamePage = (req, res) => {
-  // Dữ liệu của trò chơi, chỉ có thể truy cập khi đã đăng nhập
-  res.render('homeGame', { username: req.user.username })
-}
+    // Truyền dữ liệu vào view
+    res.render('layouts/main',{ onlineUsers, username});
+  } catch (err) {
+    console.error('Lỗi khi lấy danh sách người dùng online:', err.message);
+    res.status(500).send('Không thể lấy danh sách người dùng online');
+  }
+};
 
-module.exports = {
-  authenticateToken,
-getGamePage}
+module.exports = {authenticateToken,showOnlineUsers}

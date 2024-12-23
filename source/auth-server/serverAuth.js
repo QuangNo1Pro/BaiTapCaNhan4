@@ -9,9 +9,16 @@ const {WebSocketServer} = require('ws')
 const session = require('express-session')
 const { initializePassport } = require('./config/passport')
 const fileUpload = require('express-fileupload')
+const cors = require('cors')
 
 const PORT_AUTH = process.env.DB_PORT_SERVER_AUTH
 const app = express()
+
+app.use(cors({
+  origin: 'http://localhost:22296', // Địa chỉ của game server
+  methods: ['GET', 'POST'],
+  allowedHeaders: ['Content-Type', 'Authorization']
+}))
 
 // Middleware xử lý
 app.use(express.urlencoded({ extended: true }))
